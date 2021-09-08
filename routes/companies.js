@@ -1,4 +1,5 @@
 const express = require("express");
+const slugify = require("slugify");
 const ExpressError = require("../expressError");
 const router = express.Router();
 const db = require("../db");
@@ -48,7 +49,7 @@ router.get("/:code", async (req, res, next) => {
 router.post("/", async (req, res, next) => {
   try {
     const { name, description } = req.body;
-    const code = name.toLowerCase();
+    const code = slugify(name, { lower: true });
     const result = await db.query(
       `INSERT INTO companies (code, name, description) 
         VALUES ($1, $2, $3) 

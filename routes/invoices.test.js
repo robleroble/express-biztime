@@ -44,7 +44,6 @@ describe("GET /invoices", () => {
 describe("GET /invoices/:id", () => {
   test("get a single invoice by id", async () => {
     const res = await request(app).get(`/invoices/${testInvoice.id}`);
-    console.log(res.body);
     expect(res.statusCode).toBe(200);
     expect(res.body.invoice.amt).toEqual(500);
     expect(res.body.invoice.company.code).toEqual("google");
